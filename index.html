@@ -3,161 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grade 2 Science: Animals & Us</title>
+    <title>Wild World! - Grade 2 Science</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Londrina+Solid:wght@400;900&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --grass-green: #7cfc00;
-            --sky-blue: #87ceeb;
-            --dirt-brown: #8b4513;
+            --leaf-green: #2D6A4F;
+            --sunny-yellow: #FFB703;
+            --river-blue: #219EBC;
+            --earth-brown: #606C38;
+            --berry-red: #BC4749;
+            --sky-light: #F1FAEE;
+            --dark-forest: #1B4332;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background-color: #f0fdf4;
-            margin: 0;
-            padding: 20px;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            color: var(--dark-forest);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Elements */
+        .bg-elements { position: fixed; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
+        .bg-item { position: absolute; font-size: 3rem; opacity: 0.2; animation: float 15s linear infinite; }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.2; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--leaf-green) 0%, var(--earth-brown) 100%);
+            padding: 3rem 2rem;
             text-align: center;
+            box-shadow: 0 12px 50px rgba(0,0,0,0.2);
+            border-bottom: 8px solid var(--sunny-yellow);
         }
-        .container {
-            max-width: 800px;
-            margin: auto;
+
+        h1 {
+            font-family: 'Bungee', cursive;
+            font-size: 4rem;
+            color: white;
+            text-shadow: 4px 4px 0 var(--dark-forest);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-family: 'Londrina Solid', cursive;
+            font-size: 2rem;
+            color: var(--sunny-yellow);
+            letter-spacing: 2px;
+        }
+
+        nav {
             background: white;
-            padding: 20px;
-            border-radius: 20px;
-            border: 4px solid var(--grass-green);
-            box-shadow: 0 10px 0 #d1d5db;
+            padding: 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        h1 { color: #166534; }
-        .section { margin-bottom: 40px; padding: 20px; border-bottom: 2px dashed #ccc; }
-        
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .nav-btn {
+            background: var(--river-blue);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 15px;
+            font-family: 'Londrina Solid', cursive;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 0 #126782;
+        }
+
+        .nav-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 0 #126782; background: #023047; }
+
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 2rem; }
+
+        .page { display: none; animation: slideUp 0.5s ease-out; }
+        .page.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card {
+            background: white;
+            border-radius: 30px;
+            padding: 3rem;
+            border: 6px solid var(--leaf-green);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        h2 { font-family: 'Bungee', cursive; color: var(--leaf-green); margin-bottom: 1.5rem; }
+
         /* Drag and Drop Styles */
-        .drop-zone-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
         .drop-box {
-            width: 200px;
-            min-height: 120px;
-            border: 3px dashed #666;
-            border-radius: 10px;
-            padding: 10px;
-            background: #f9fafb;
+            background: var(--sky-light);
+            border: 4px dashed var(--river-blue);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 15px 0;
+            min-height: 100px;
+            transition: 0.3s;
         }
         .drag-item {
-            background: #fef08a;
-            padding: 10px;
-            margin: 5px;
-            border-radius: 8px;
-            cursor: grab;
-            border: 2px solid #ca8a04;
             display: inline-block;
+            background: var(--sunny-yellow);
+            padding: 10px 20px;
+            border-radius: 12px;
+            margin: 10px;
+            cursor: grab;
+            font-weight: bold;
+            border: 3px solid #b58300;
         }
-        
+
         /* Quiz Styles */
-        .quiz-option {
-            display: block;
-            width: 100%;
+        .option {
+            background: #f8f9fa;
+            border: 3px solid #dee2e6;
             padding: 15px;
+            border-radius: 15px;
             margin: 10px 0;
-            background: #e0f2fe;
-            border: 2px solid #3b82f6;
-            border-radius: 10px;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-weight: 600;
+            transition: 0.2s;
         }
-        .quiz-option:hover { background: #bae6fd; }
-        .correct { background: #bbf7d0 !important; border-color: #22c55e !important; }
-        .wrong { background: #fecaca !important; border-color: #ef4444 !important; }
-        
-        .hidden { display: none; }
-        #badge { font-size: 50px; margin-top: 20px; }
+        .option:hover { border-color: var(--river-blue); background: #e9ecef; }
+        .correct { background: #d4edda !important; border-color: #28a745 !important; }
+        .wrong { background: #f8d7da !important; border-color: #dc3545 !important; }
+
+        .btn-check {
+            background: var(--leaf-green);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            font-family: 'Bungee';
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>🐾 Animals, Humans, and Our Earth!</h1>
-    
-    <div class="section">
-        <h2>Activity 1: Helping Animals & Society</h2>
-        <p>Animals sometimes do things that make life hard for humans. Drag the <b>Solution</b> to the <b>Animal Problem</b>!</p>
-        
-        <div class="drop-zone-container">
-            <div class="drop-box" ondrop="drop(event)" ondragover="allowDrop(event)" id="raccoon-zone">
-                <p><b>Raccoons</b> making a mess in the trash.</p>
+    <div class="bg-elements" id="bgItems"></div>
+
+    <header>
+        <h1>WILD WORLD!</h1>
+        <p class="subtitle">🐾 Living with Animals 🐾</p>
+    </header>
+
+    <nav>
+        <div class="nav-grid">
+            <button class="nav-btn" onclick="showPage('b11')">Mission 1: Animal Problems</button>
+            <button class="nav-btn" onclick="showPage('b12')">Mission 2: Human Helpers</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="b11" class="page active">
+            <div class="card">
+                <h2>🦝 Animals in the Neighborhood</h2>
+                <p>Sometimes animals live close to humans and cause a "messy" problem! Can you find the <b>Solution</b> for each animal?</p>
+                
+                <div class="drop-box" id="target-raccoons" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <p><b>PROBLEM:</b> Raccoons keep tipping over the trash cans at night.</p>
+                </div>
+
+                <div class="drop-box" id="target-geese" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <p><b>PROBLEM:</b> Geese are making the park grass too messy to play on.</p>
+                </div>
+
+                <div id="drag-source" style="text-align:center; margin-top:20px;">
+                    <div class="drag-item" draggable="true" ondragstart="drag(event)" id="sol-raccoons">Use Lockable Bins 🔒</div>
+                    <div class="drag-item" draggable="true" ondragstart="drag(event)" id="sol-geese">Add Fences or Plants 🌿</div>
+                </div>
             </div>
-            <div class="drop-box" ondrop="drop(event)" ondragover="allowDrop(event)" id="deer-zone">
-                <p><b>Deer</b> eating all the garden flowers.</p>
+        </div>
+
+        <div id="b12" class="page">
+            <div class="card">
+                <h2>🏗️ Helping Animal Homes</h2>
+                <p>When humans build cities, we take away space where animals live. How can we help?</p>
+                
+                <div id="quiz-area">
+                    <p style="margin-top:20px; font-weight:bold;">1. Humans are building a new highway. How can turtles get across safely?</p>
+                    <div class="option" onclick="answer(this, false)">A) Tell the turtles to walk faster.</div>
+                    <div class="option" onclick="answer(this, true)">B) Build a "Wildlife Tunnel" under the road.</div>
+                    
+                    <p style="margin-top:20px; font-weight:bold;">2. There is a lot of trash on the beach where birds live. What should we do?</p>
+                    <div class="option" onclick="answer(this, true)">A) Have a community "Clean-Up Day."</div>
+                    <div class="option" onclick="answer(this, false)">B) Move the birds to a different beach.</div>
+                </div>
+                <button class="btn-check" onclick="location.reload()">Reset Mission</button>
             </div>
         </div>
-
-        <div style="margin-top: 20px;">
-            <div class="drag-item" draggable="true" ondragstart="drag(event)" id="solution1">Lockable Green Bins</div>
-            <div class="drag-item" draggable="true" ondragstart="drag(event)" id="solution2">Fences or Deer-Repellent Plants</div>
-        </div>
     </div>
 
-    <div class="section">
-        <h2>Activity 2: Human Impact</h2>
-        <p>Humans change the world. How can we do it better?</p>
-        <div id="quiz">
-            <p><b>Question:</b> Humans are building a new road through a forest. What is the BEST way to help the animals cross safely?</p>
-            <button class="quiz-option" onclick="checkAnswer(this, false)">Put up a "Stop" sign for animals.</button>
-            <button class="quiz-option" onclick="checkAnswer(this, true)">Build a Bridge or Tunnel just for animals.</button>
-            <button class="quiz-option" onclick="checkAnswer(this, false)">Feed the animals snacks near the road.</button>
-        </div>
-    </div>
-
-    <div id="finish-area" class="hidden">
-        <h2>🎉 You are a Nature Hero!</h2>
-        <div id="badge">🏆🦉🐢</div>
-        <p>You learned how to help animals and humans live together happily!</p>
-    </div>
-</div>
-
-<script>
-    // Drag and Drop Logic
-    function allowDrop(ev) { ev.preventDefault(); }
-    function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
-    function drop(ev) {
-        ev.preventDefault();
-        var data = ev.dataTransfer.getData("text");
-        var draggedEl = document.getElementById(data);
-        
-        // Simple logic: Solution 1 goes to Raccoon, Solution 2 to Deer
-        if ((data === "solution1" && ev.target.id === "raccoon-zone") || 
-            (data === "solution2" && ev.target.id === "deer-zone")) {
-            ev.target.appendChild(draggedEl);
-            draggedEl.style.backgroundColor = "#bbf7d0";
-            checkWin();
-        } else {
-            alert("Try another spot! Think about what would help that animal.");
+    <script>
+        // Background Animation Generator
+        const bg = document.getElementById('bgItems');
+        const icons = ['🐾', '🍃', '🐦', '🦋', '🐢'];
+        for(let i=0; i<15; i++) {
+            let div = document.createElement('div');
+            div.className = 'bg-item';
+            div.innerHTML = icons[Math.floor(Math.random()*icons.length)];
+            div.style.left = Math.random() * 100 + 'vw';
+            div.style.animationDelay = Math.random() * 15 + 's';
+            bg.appendChild(div);
         }
-    }
 
-    // Quiz Logic
-    let quizDone = false;
-    function checkAnswer(btn, isCorrect) {
-        if(isCorrect) {
-            btn.classList.add('correct');
-            quizDone = true;
-            checkWin();
-        } else {
-            btn.classList.add('wrong');
-            alert("Not quite! Think about how animals move safely.");
+        // Navigation
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
         }
-    }
 
-    function checkWin() {
-        const raccoonSolved = document.getElementById('raccoon-zone').contains(document.getElementById('solution1'));
-        const deerSolved = document.getElementById('deer-zone').contains(document.getElementById('solution2'));
-        
-        if (raccoonSolved && deerSolved && quizDone) {
-            document.getElementById('finish-area').classList.remove('hidden');
+        // Drag and Drop Logic
+        function allowDrop(ev) { ev.preventDefault(); }
+        function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
+        function drop(ev) {
+            ev.preventDefault();
+            let data = ev.dataTransfer.setData("text", ev.target.id); // This is just a placeholder
+            let draggedId = ev.dataTransfer.getData("text");
+            let targetId = ev.target.closest('.drop-box').id;
+
+            if((draggedId === 'sol-raccoons' && targetId === 'target-raccoons') || 
+               (draggedId === 'sol-geese' && targetId === 'target-geese')) {
+                ev.target.closest('.drop-box').appendChild(document.getElementById(draggedId));
+                ev.target.closest('.drop-box').style.background = "#d4edda";
+                ev.target.closest('.drop-box').style.borderStyle = "solid";
+            } else {
+                alert("That doesn't quite fix the problem! Try a different solution.");
+            }
         }
-    }
-</script>
 
+        // Quiz Logic
+        function answer(el, isCorrect) {
+            if(isCorrect) {
+                el.classList.add('correct');
+                el.innerHTML += " ✅ Correct!";
+            } else {
+                el.classList.add('wrong');
+                alert("Try again! Think about what's safest for the animals.");
+            }
+        }
+    </script>
 </body>
 </html>
