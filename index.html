@@ -19,42 +19,40 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            background: #f0fdf4;
             color: var(--dark-forest);
             overflow-x: hidden;
         }
 
         /* Animated Background Elements */
         .bg-elements { position: fixed; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
-        .bg-item { position: absolute; font-size: 3rem; opacity: 0.2; animation: float 15s linear infinite; }
+        .bg-item { position: absolute; font-size: 3rem; opacity: 0.15; animation: float 15s linear infinite; }
         @keyframes float {
             0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
             10% { opacity: 0.2; }
-            90% { opacity: 0.2; }
             100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
         header {
             background: linear-gradient(135deg, var(--leaf-green) 0%, var(--earth-brown) 100%);
-            padding: 3rem 2rem;
+            padding: 4rem 2rem;
             text-align: center;
-            box-shadow: 0 12px 50px rgba(0,0,0,0.2);
-            border-bottom: 8px solid var(--sunny-yellow);
+            border-bottom: 10px solid var(--sunny-yellow);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         h1 {
             font-family: 'Bungee', cursive;
-            font-size: 4rem;
+            font-size: 4.5rem;
             color: white;
-            text-shadow: 4px 4px 0 var(--dark-forest);
+            text-shadow: 5px 5px 0 var(--dark-forest);
             margin-bottom: 10px;
         }
 
         .subtitle {
             font-family: 'Londrina Solid', cursive;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--sunny-yellow);
-            letter-spacing: 2px;
         }
 
         nav {
@@ -64,13 +62,14 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-bottom: 4px solid var(--river-blue);
         }
 
         .nav-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            max-width: 1000px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -78,79 +77,84 @@
             background: var(--river-blue);
             color: white;
             border: none;
-            padding: 1rem;
-            border-radius: 15px;
+            padding: 1.2rem;
+            border-radius: 20px;
             font-family: 'Londrina Solid', cursive;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 5px 0 #126782;
+            box-shadow: 0 6px 0 #126782;
         }
 
-        .nav-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 0 #126782; background: #023047; }
+        .nav-btn:hover { transform: translateY(-3px); box-shadow: 0 9px 0 #126782; background: #023047; }
 
-        .container { max-width: 1000px; margin: 2rem auto; padding: 0 2rem; }
+        .container { max-width: 1100px; margin: 3rem auto; padding: 0 2rem; }
 
-        .page { display: none; animation: slideUp 0.5s ease-out; }
+        .page { display: none; animation: slideUp 0.6s ease-out; }
         .page.active { display: block; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
         .card {
             background: white;
-            border-radius: 30px;
-            padding: 3rem;
-            border: 6px solid var(--leaf-green);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-radius: 40px;
+            padding: 3.5rem;
+            border: 8px solid var(--leaf-green);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
         }
 
-        h2 { font-family: 'Bungee', cursive; color: var(--leaf-green); margin-bottom: 1.5rem; }
+        .info-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 25px;
+            margin: 1.5rem 0;
+            border: 5px solid var(--sky-light);
+        }
 
-        /* Drag and Drop Styles */
+        h2 { font-family: 'Bungee', cursive; color: var(--leaf-green); font-size: 2.5rem; margin-bottom: 1rem; }
+        h3 { font-family: 'Londrina Solid', cursive; font-size: 2rem; color: var(--river-blue); margin-top: 2rem; }
+        p { font-size: 1.3rem; line-height: 1.8; margin-bottom: 1rem; }
+
+        /* Problem/Solution Blocks */
+        .mission-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 2rem;
+        }
+
         .drop-box {
-            background: var(--sky-light);
-            border: 4px dashed var(--river-blue);
-            border-radius: 20px;
-            padding: 20px;
-            margin: 15px 0;
-            min-height: 100px;
-            transition: 0.3s;
+            background: #f8fafc;
+            border: 5px dashed var(--river-blue);
+            border-radius: 25px;
+            padding: 25px;
+            min-height: 180px;
+            text-align: center;
         }
+
         .drag-item {
-            display: inline-block;
             background: var(--sunny-yellow);
-            padding: 10px 20px;
-            border-radius: 12px;
+            padding: 15px 25px;
+            border-radius: 20px;
             margin: 10px;
             cursor: grab;
-            font-weight: bold;
-            border: 3px solid #b58300;
+            font-family: 'Londrina Solid', cursive;
+            font-size: 1.4rem;
+            display: inline-block;
+            box-shadow: 0 5px 0 #b58300;
         }
 
-        /* Quiz Styles */
-        .option {
-            background: #f8f9fa;
-            border: 3px solid #dee2e6;
-            padding: 15px;
+        /* Nature Hero Tips */
+        .hero-tip {
+            background: var(--sky-light);
+            border-left: 10px solid var(--sunny-yellow);
+            padding: 1.5rem;
             border-radius: 15px;
-            margin: 10px 0;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.2s;
+            margin: 2rem 0;
+            font-style: italic;
         }
-        .option:hover { border-color: var(--river-blue); background: #e9ecef; }
-        .correct { background: #d4edda !important; border-color: #28a745 !important; }
-        .wrong { background: #f8d7da !important; border-color: #dc3545 !important; }
 
-        .btn-check {
-            background: var(--leaf-green);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 15px;
-            font-family: 'Bungee';
-            border: none;
-            cursor: pointer;
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
@@ -159,102 +163,114 @@
 
     <header>
         <h1>WILD WORLD!</h1>
-        <p class="subtitle">🐾 Living with Animals 🐾</p>
+        <p class="subtitle">🌿 Animals and Us: Growing Together 🌿</p>
     </header>
 
     <nav>
         <div class="nav-grid">
-            <button class="nav-btn" onclick="showPage('b11')">Mission 1: Animal Problems</button>
-            <button class="nav-btn" onclick="showPage('b12')">Mission 2: Human Helpers</button>
+            <button class="nav-btn" onclick="showPage('b11')">🐾 Mission 1: Animal Impacts</button>
+            <button class="nav-btn" onclick="showPage('b12')">🏗️ Mission 2: Human Impacts</button>
         </div>
     </nav>
 
     <div class="container">
+        
         <div id="b11" class="page active">
             <div class="card">
-                <h2>🦝 Animals in the Neighborhood</h2>
-                <p>Sometimes animals live close to humans and cause a "messy" problem! Can you find the <b>Solution</b> for each animal?</p>
+                <h2>B1.1: Animals Changing Our World</h2>
+                <p>Did you know animals are busy workers? Sometimes, their hard work makes life tricky for humans. This is called an <b>impact</b>.</p>
                 
-                <div class="drop-box" id="target-raccoons" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <p><b>PROBLEM:</b> Raccoons keep tipping over the trash cans at night.</p>
+                <img src="https://images.unsplash.com/photo-1590055531764-9eed26239413?q=80&w=1000&auto=format&fit=crop" alt="Raccoon" class="info-img">
+
+                <h3>The Neighborhood Bandits (Raccoons)</h3>
+                <p>Raccoons love to eat! In the city, they have learned that human trash cans are like a buffet. They knock them over and leave a big mess for us to clean up!</p>
+                
+                <div class="hero-tip">
+                    <b>Nature Hero Tip:</b> We shouldn't be mad at raccoons. They are just trying to find lunch!
                 </div>
 
-                <div class="drop-box" id="target-geese" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <p><b>PROBLEM:</b> Geese are making the park grass too messy to play on.</p>
+                <h3>Matching Mission</h3>
+                <p>Drag the <b>Best Solution</b> to the <b>Animal Problem</b>!</p>
+
+                <div class="mission-box">
+                    <div class="drop-box" id="target-raccoons" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <p><b>PROBLEM:</b><br>Raccoons scattering trash everywhere.</p>
+                    </div>
+                    <div class="drop-box" id="target-geese" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <p><b>PROBLEM:</b><br>Geese blocking paths and making parks messy.</p>
+                    </div>
                 </div>
 
-                <div id="drag-source" style="text-align:center; margin-top:20px;">
-                    <div class="drag-item" draggable="true" ondragstart="drag(event)" id="sol-raccoons">Use Lockable Bins 🔒</div>
-                    <div class="drag-item" draggable="true" ondragstart="drag(event)" id="sol-geese">Add Fences or Plants 🌿</div>
+                <div id="drag-source" style="text-align:center; margin-top:30px;">
+                    <div class="drag-item" draggable="true" ondragstart="drag(event)" id="sol-raccoons">🔒 Bungee Cords on Lids</div>
+                    <div class="drag-item" draggable="true" ondragstart="drag(event)" id="sol-geese">🌾 Grow Tall Grass (Geese dislike it!)</div>
                 </div>
             </div>
         </div>
 
         <div id="b12" class="page">
             <div class="card">
-                <h2>🏗️ Helping Animal Homes</h2>
-                <p>When humans build cities, we take away space where animals live. How can we help?</p>
+                <h2>B1.2: Humans Helping Habitats</h2>
+                <p>Humans build roads, houses, and factories. Sometimes, this accidentally hurts animal homes (habitats). But we can be <b>Problem Solvers!</b></p>
+                
+                <img src="https://images.unsplash.com/photo-1518116515281-2287950c4573?q=80&w=1000&auto=format&fit=crop" alt="Wildlife Bridge" class="info-img">
+
+                <h3>Wildlife Bridges</h3>
+                <p>When we build a big road through a forest, animals like deer or bears can't get to the other side to find food or their families. Scientists now build <b>Green Bridges</b> covered in trees so animals can cross safely above the cars!</p>
+
+                <div class="hero-tip">
+                    <b>Nature Hero Tip:</b> Making a small change, like planting a pollinator garden, helps bees and butterflies find a new home in your backyard!
+                </div>
+
+                <h3>The Hero Quiz</h3>
+                <p>Pick the best way for humans to minimize their impact:</p>
                 
                 <div id="quiz-area">
-                    <p style="margin-top:20px; font-weight:bold;">1. Humans are building a new highway. How can turtles get across safely?</p>
-                    <div class="option" onclick="answer(this, false)">A) Tell the turtles to walk faster.</div>
-                    <div class="option" onclick="answer(this, true)">B) Build a "Wildlife Tunnel" under the road.</div>
-                    
-                    <p style="margin-top:20px; font-weight:bold;">2. There is a lot of trash on the beach where birds live. What should we do?</p>
-                    <div class="option" onclick="answer(this, true)">A) Have a community "Clean-Up Day."</div>
-                    <div class="option" onclick="answer(this, false)">B) Move the birds to a different beach.</div>
+                    <div class="option" onclick="this.style.background='#d4edda'; alert('Correct! This saves water for the fish!')">💧 Turning off the tap while brushing teeth.</div>
+                    <div class="option" onclick="this.style.background='#f8d7da'; alert('Oops! That takes away bird homes.')">🌳 Cutting down a forest to build a playground.</div>
+                    <div class="option" onclick="this.style.background='#d4edda'; alert('Correct! Plastic can hurt sea turtles.')">🛍️ Using a reusable bag instead of plastic.</div>
                 </div>
-                <button class="btn-check" onclick="location.reload()">Reset Mission</button>
             </div>
         </div>
+
     </div>
 
     <script>
-        // Background Animation Generator
+        // Background Animation
         const bg = document.getElementById('bgItems');
-        const icons = ['🐾', '🍃', '🐦', '🦋', '🐢'];
-        for(let i=0; i<15; i++) {
+        const icons = ['🐾', '🌿', '🦊', '🦉', '🐢', '🦋'];
+        for(let i=0; i<20; i++) {
             let div = document.createElement('div');
             div.className = 'bg-item';
             div.innerHTML = icons[Math.floor(Math.random()*icons.length)];
             div.style.left = Math.random() * 100 + 'vw';
             div.style.animationDelay = Math.random() * 15 + 's';
+            div.style.fontSize = (Math.random() * 2 + 2) + 'rem';
             bg.appendChild(div);
         }
 
-        // Navigation
+        // Page Navigation
         function showPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(id).classList.add('active');
+            window.scrollTo(0,0);
         }
 
-        // Drag and Drop Logic
+        // Drag & Drop
         function allowDrop(ev) { ev.preventDefault(); }
         function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
         function drop(ev) {
             ev.preventDefault();
-            let data = ev.dataTransfer.setData("text", ev.target.id); // This is just a placeholder
             let draggedId = ev.dataTransfer.getData("text");
-            let targetId = ev.target.closest('.drop-box').id;
-
-            if((draggedId === 'sol-raccoons' && targetId === 'target-raccoons') || 
-               (draggedId === 'sol-geese' && targetId === 'target-geese')) {
-                ev.target.closest('.drop-box').appendChild(document.getElementById(draggedId));
-                ev.target.closest('.drop-box').style.background = "#d4edda";
-                ev.target.closest('.drop-box').style.borderStyle = "solid";
+            let target = ev.target.closest('.drop-box');
+            
+            if((draggedId === 'sol-raccoons' && target.id === 'target-raccoons') || 
+               (draggedId === 'sol-geese' && target.id === 'target-geese')) {
+                target.appendChild(document.getElementById(draggedId));
+                target.style.background = "#dcfce7";
+                target.style.borderColor = "#22c55e";
             } else {
-                alert("That doesn't quite fix the problem! Try a different solution.");
-            }
-        }
-
-        // Quiz Logic
-        function answer(el, isCorrect) {
-            if(isCorrect) {
-                el.classList.add('correct');
-                el.innerHTML += " ✅ Correct!";
-            } else {
-                el.classList.add('wrong');
-                alert("Try again! Think about what's safest for the animals.");
+                alert("Wait! That solution might work better for a different animal.");
             }
         }
     </script>
