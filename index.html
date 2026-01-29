@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 2 Science: Animals & Us</title>
+    <style>
+        :root {
+            --grass-green: #7cfc00;
+            --sky-blue: #87ceeb;
+            --dirt-brown: #8b4513;
+        }
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f0fdf4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            border: 4px solid var(--grass-green);
+            box-shadow: 0 10px 0 #d1d5db;
+        }
+        h1 { color: #166534; }
+        .section { margin-bottom: 40px; padding: 20px; border-bottom: 2px dashed #ccc; }
+        
+        /* Drag and Drop Styles */
+        .drop-zone-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .drop-box {
+            width: 200px;
+            min-height: 120px;
+            border: 3px dashed #666;
+            border-radius: 10px;
+            padding: 10px;
+            background: #f9fafb;
+        }
+        .drag-item {
+            background: #fef08a;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: grab;
+            border: 2px solid #ca8a04;
+            display: inline-block;
+        }
+        
+        /* Quiz Styles */
+        .quiz-option {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: #e0f2fe;
+            border: 2px solid #3b82f6;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        .quiz-option:hover { background: #bae6fd; }
+        .correct { background: #bbf7d0 !important; border-color: #22c55e !important; }
+        .wrong { background: #fecaca !important; border-color: #ef4444 !important; }
+        
+        .hidden { display: none; }
+        #badge { font-size: 50px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🐾 Animals, Humans, and Our Earth!</h1>
+    
+    <div class="section">
+        <h2>Activity 1: Helping Animals & Society</h2>
+        <p>Animals sometimes do things that make life hard for humans. Drag the <b>Solution</b> to the <b>Animal Problem</b>!</p>
+        
+        <div class="drop-zone-container">
+            <div class="drop-box" ondrop="drop(event)" ondragover="allowDrop(event)" id="raccoon-zone">
+                <p><b>Raccoons</b> making a mess in the trash.</p>
+            </div>
+            <div class="drop-box" ondrop="drop(event)" ondragover="allowDrop(event)" id="deer-zone">
+                <p><b>Deer</b> eating all the garden flowers.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <div class="drag-item" draggable="true" ondragstart="drag(event)" id="solution1">Lockable Green Bins</div>
+            <div class="drag-item" draggable="true" ondragstart="drag(event)" id="solution2">Fences or Deer-Repellent Plants</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Activity 2: Human Impact</h2>
+        <p>Humans change the world. How can we do it better?</p>
+        <div id="quiz">
+            <p><b>Question:</b> Humans are building a new road through a forest. What is the BEST way to help the animals cross safely?</p>
+            <button class="quiz-option" onclick="checkAnswer(this, false)">Put up a "Stop" sign for animals.</button>
+            <button class="quiz-option" onclick="checkAnswer(this, true)">Build a Bridge or Tunnel just for animals.</button>
+            <button class="quiz-option" onclick="checkAnswer(this, false)">Feed the animals snacks near the road.</button>
+        </div>
+    </div>
+
+    <div id="finish-area" class="hidden">
+        <h2>🎉 You are a Nature Hero!</h2>
+        <div id="badge">🏆🦉🐢</div>
+        <p>You learned how to help animals and humans live together happily!</p>
+    </div>
+</div>
+
+<script>
+    // Drag and Drop Logic
+    function allowDrop(ev) { ev.preventDefault(); }
+    function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        var draggedEl = document.getElementById(data);
+        
+        // Simple logic: Solution 1 goes to Raccoon, Solution 2 to Deer
+        if ((data === "solution1" && ev.target.id === "raccoon-zone") || 
+            (data === "solution2" && ev.target.id === "deer-zone")) {
+            ev.target.appendChild(draggedEl);
+            draggedEl.style.backgroundColor = "#bbf7d0";
+            checkWin();
+        } else {
+            alert("Try another spot! Think about what would help that animal.");
+        }
+    }
+
+    // Quiz Logic
+    let quizDone = false;
+    function checkAnswer(btn, isCorrect) {
+        if(isCorrect) {
+            btn.classList.add('correct');
+            quizDone = true;
+            checkWin();
+        } else {
+            btn.classList.add('wrong');
+            alert("Not quite! Think about how animals move safely.");
+        }
+    }
+
+    function checkWin() {
+        const raccoonSolved = document.getElementById('raccoon-zone').contains(document.getElementById('solution1'));
+        const deerSolved = document.getElementById('deer-zone').contains(document.getElementById('solution2'));
+        
+        if (raccoonSolved && deerSolved && quizDone) {
+            document.getElementById('finish-area').classList.remove('hidden');
+        }
+    }
+</script>
+
+</body>
+</html>
